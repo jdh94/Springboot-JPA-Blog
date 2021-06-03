@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cosblog.madel.RoleType;
-import com.cosblog.madel.User;
+import com.cosblog.model.RoleType;
+import com.cosblog.model.User;
 import com.cosblog.repository.UserRepository;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.cosblog.madel;
+package com.cosblog.model;
 
 import java.awt.List;
 import java.sql.Timestamp;
