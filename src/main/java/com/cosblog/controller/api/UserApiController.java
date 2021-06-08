@@ -29,6 +29,9 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AuthenticationManager authenticationManager;
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // username, password, email
 		System.out.println("UserApiController : save호출됨");
@@ -43,6 +46,9 @@ public class UserApiController {
 		//여기서 트랜잭션이 종료되기 때문에 DB는 변경되었지만
 		//세션값은 변경되지 않았기에 우리가 직접 세션값을 변경해줄 것임
 		//세션 등록
+		
+		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
