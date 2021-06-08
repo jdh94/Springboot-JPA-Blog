@@ -34,7 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 public class UserController {
 
-	@Value("${cos.key")
+	@Value("${cos.key}")
 	private String cosKey;
 	
 	@Autowired
@@ -141,13 +141,13 @@ public class UserController {
 		
 		System.out.println("블로그 유저네임 : " + kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId());
 		System.out.println("블로그서버 이메일" + kakaoProfile.getKakao_account().getEmail());
-		UUID garbagePassword = UUID.randomUUID();
 		System.out.println("블로그 서버 패스워드 : " + cosKey);
 		
 		User kakaoUser = User.builder()
 				.username(kakaoProfile.getKakao_account().getEmail()+"_"+kakaoProfile.getId())
 				.password(cosKey)
 				.email(kakaoProfile.getKakao_account().getEmail())
+				.oauth("kakao")
 				.build();
 		
 		//가입자 혹은 비가입자 체크해서 처리
@@ -155,7 +155,7 @@ public class UserController {
 		User originUser = userService.회원찾기(kakaoUser.getUsername());
 		
 		if(originUser.getUsername() == null) {
-			System.out.println("기존회원입니다......!!");
+			System.out.println("기존회원이 아니기에 자동 회원가입을 진행합니다.");
 			userService.회원가입(kakaoUser);
 		}
 		
