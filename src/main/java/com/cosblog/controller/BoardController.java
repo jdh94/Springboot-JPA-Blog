@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.cosblog.config.auth.PrincipalDetail;
+import com.cosblog.repository.ReplyRepository;
 import com.cosblog.repository.service.BoardService;
 
 @Controller
@@ -18,7 +19,7 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
-	
+
 	//	@AuthenticationPrincipal PrincipalDetail principal
 	@GetMapping({"","/"})
 	public String index(Model model, @PageableDefault(size=3, sort="id", direction = Sort.Direction.DESC) Pageable pageable) {

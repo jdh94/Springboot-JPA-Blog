@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cosblog.model.Board;
+import com.cosblog.model.Reply;
 import com.cosblog.model.RoleType;
 import com.cosblog.model.User;
 import com.cosblog.repository.BoardRepository;
+import com.cosblog.repository.ReplyRepository;
 import com.cosblog.repository.UserRepository;
 
 import ch.qos.logback.core.encoder.Encoder;
@@ -27,6 +29,10 @@ public class BoardService {
 	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	@Transactional
 	public void 글쓰기(Board board, User user) { // title, content
@@ -64,4 +70,15 @@ public class BoardService {
 		//해당 함수로 종료수(Service가 종료될 때) 트랜잭션이 종료됩니다. 이때 더티체킹 - 자동업데이트가 flush
 	}
 	
+	@Transactional
+	public void 댓글쓰기(User user, int boardId, Reply requestReply) {
+		Board board = boardRepository.findById(boardId)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
+				}); 
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+	
+		replyRepository.save(requestReply);
+	}
 }
