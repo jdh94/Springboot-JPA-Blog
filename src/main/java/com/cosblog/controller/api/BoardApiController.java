@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cosblog.config.auth.PrincipalDetail;
+import com.cosblog.dto.ReplySaveRequestDto;
 import com.cosblog.dto.ResponseDto;
 import com.cosblog.model.Board;
 import com.cosblog.model.Reply;
@@ -46,10 +47,19 @@ public class BoardApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 	
+	
+	// 데이터를 받을 때 컨트롤러에서 dto를 만들어서 받는게 좋다. 
+	// dto 사용하지 않은 이유는! 작은 프로젝트 였기 때문에
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseDto<Integer> replySave(@PathVariable int boardId, @RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal) { // username, password, email
+	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto replySaveRequestDto) { // username, password, email
 		
-		boardService.댓글쓰기(principal.getUser(), boardId, reply);
+		boardService.댓글쓰기(replySaveRequestDto);
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
+		boardService.댓글삭제(replyId);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }

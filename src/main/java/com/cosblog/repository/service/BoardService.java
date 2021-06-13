@@ -10,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cosblog.dto.ReplySaveRequestDto;
 import com.cosblog.model.Board;
 import com.cosblog.model.Reply;
 import com.cosblog.model.RoleType;
@@ -30,6 +31,8 @@ public class BoardService {
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 	
+	@Autowired
+	private UserRepository userRepository;
 	
 	@Autowired
 	private ReplyRepository replyRepository;
@@ -71,14 +74,15 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public void 댓글쓰기(User user, int boardId, Reply requestReply) {
-		Board board = boardRepository.findById(boardId)
-				.orElseThrow(()->{
-					return new IllegalArgumentException("댓글 쓰기 실패 : 게시글 아이디를 찾을 수 없습니다.");
-				}); 
-		requestReply.setUser(user);
-		requestReply.setBoard(board);
+	public void 댓글쓰기(ReplySaveRequestDto replySaveRequestDto) {
+
+		
+		
+		replyRepository.mSave(replySaveRequestDto.getUserId(), replySaveRequestDto.getBoardId(), replySaveRequestDto.getContent());
+	}
 	
-		replyRepository.save(requestReply);
+	@Transactional
+	public void 댓글삭제(int replyId) {
+		replyRepository.deleteById(replyId);
 	}
 }
