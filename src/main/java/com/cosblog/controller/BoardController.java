@@ -26,6 +26,7 @@ public class BoardController {
 		model.addAttribute("boards", boardService.글목록(pageable));
 		// yml설정값 prefix : "/WEB-INF/views/" + return 값 "index" + yml설정값 suffix : ".jsp" 의 경로를 찾아줌
 		// GetMapping의 "/"를 통해 설정되있는 포트값 주소의 + "/"인 url으로 매핑
+		System.out.println("홈호출");
 		return "index";
 	}
 	

@@ -8,8 +8,9 @@
 		<version>2.4.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.cos</groupId>
-	<artifactId>blog</artifactId>
+	<groupId>com</groupId>
+	<artifactId>cosblog</artifactId>
+	<packaging>jar</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>blog</name>
 	<description>My First Blog Project</description>
@@ -31,6 +32,7 @@
 	  <groupId>org.apache.tomcat.embed</groupId>
 	  <artifactId>tomcat-embed-jasper</artifactId>
 	</dependency>
+	
 	
 	<!-- JSTL -->
 	<dependency>
@@ -54,6 +56,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
