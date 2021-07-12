@@ -104,7 +104,7 @@ let index = {
 		//ajax 통신을 이용해서 3개의 데이터를 json으로 변경하여 insert요청
 		//ajax가 통신을 성공하고 서버가 json을 리턴해주면 자동으로 자바 오브젝트를 변환해준다.
 		$.ajax({
-			// 회원가입 수행요청
+			// 댓글 입력수행
 			type: "POST",
 			url: `/api/board/${data.boardId}/reply`,
 			data: JSON.stringify(data), // http body데이터

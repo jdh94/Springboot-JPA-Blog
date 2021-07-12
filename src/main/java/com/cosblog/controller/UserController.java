@@ -70,7 +70,7 @@ public class UserController {
 		MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
 		params.add("grant_type", "authorization_code");
 		params.add("client_id", "095309cfb5cd292b174f3df1ab2409e1");
-		params.add("redirect_uri", "http://localhost:8000/auth/kakao/callback");
+		params.add("redirect_uri", "https://www.alumus.site/auth/kakao/callback");
 		params.add("code", code);
 		
 		// header, body를 가지는 entity만듬
