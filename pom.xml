@@ -40,6 +40,13 @@
 	  <artifactId>jstl</artifactId>
 	</dependency>
 		
+	<dependency>
+    	<groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter</artifactId>
+        <version>5.5.0</version>
+        <scope>test</scope>
+    </dependency>
+    
 	<!--  추가 라이브러리 종료 -->
 	
 		<dependency>
